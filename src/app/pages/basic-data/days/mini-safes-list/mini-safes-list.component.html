@@ -1,0 +1,96 @@
+
+<div class="search-div">
+    <mat-toolbar color="primary">
+      <span class="example-fill-remaining-space"></span>  
+    <span>جميع الخزن للموظف </span>
+    <span class="example-fill-remaining-space"></span>  
+    </mat-toolbar>   
+    <br/><br/>
+    <button *ngIf="MiniSafeId!=-1" style="float: right;" mat-raised-button  (click)="onCreateOrEdit()">
+      <span *ngIf="MiniSafeId==0"><mat-icon>add</mat-icon>اضافه جديد</span>  
+      <span  *ngIf="MiniSafeId==1"><mat-icon>delete</mat-icon>اغلاق</span>
+      </button>
+   
+    
+   
+      <mat-form-field  class="search-form-field" floatLabel="never">
+        <input style="text-align: right" class="search" matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      
+      </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+      <div id="demo">
+      <mat-table  [dataSource]="listData"  matSort>
+
+        
+     
+        <ng-container matColumnDef="MiniSafeCode">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  كود الخزنه     </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.MiniSafeCode}}</mat-cell>
+          </ng-container>
+
+
+        <ng-container matColumnDef="StartDate">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  تاريخ فتح الخزنه   </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.StartDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="StartTime">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  وقت بداية الخزنه</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.StartDate |date:'shortTime'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EndDate">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  تاريخ غلق الخزنه  </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.EndDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EndTime">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  وقت  غلق  الخزنه  </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.EndDate |date:'shortTime' }}</mat-cell>
+          </ng-container>
+
+
+         
+          
+        <ng-container matColumnDef="actions">
+         
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+       
+          <mat-cell *matCellDef="let element">
+            <button  class="btn btn-primary"   (click)="onShow(element.MiniSafeId)">تقرير بالخزنه</button>
+            
+        
+          </mat-cell>
+      
+        </ng-container>
+    
+  
+     
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+     
+      </mat-table>
+  </div>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+  
+  
+  
+

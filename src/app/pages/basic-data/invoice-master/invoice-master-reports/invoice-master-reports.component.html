@@ -1,0 +1,52 @@
+<div id="demo">
+<h1 style="text-align: center;">{{DocTypeName}}</h1>
+<br/><br/>
+<div dir="rtl" >
+
+<table dir="rtl" class="table table-bordered table-hover">
+<tbody style="text-align: right">
+<tr>
+<td>كود الفاتوره  </td>
+<td>{{InvoiceMasterCode}}</td>
+
+<td>اسم القسم </td>
+<td>{{DeptDescr}}</td>
+</tr>
+<tr>
+<td>تاريخ الفاتوره</td>
+<td>{{CurrentDate |date}}</td>
+ <td>وقت الفاتوره</td>
+ <td>{{CurrentDate |date:'shortTime'}}</td>
+</tr>
+<tr>
+<td *ngIf="DocTypeId!=8"> اسم المستلم </td>
+<td *ngIf="DocTypeId!=8">{{ReceiverDesc}}</td>
+<td>ملاحظات</td>
+<td>{{Notes}}</td>
+<td>اسم الموظف</td>
+<td>{{EmployeeName}}</td>
+</tr>
+</tbody>
+</table>
+
+<table dir="rtl" class="table table-bordered table-hover">
+  <thead style="text-align: right">
+  <th>الاسم  </th>
+  <th>الكميه </th>
+
+</thead>
+<tbody dir="rtl" style="text-align: right">
+  <tr  *ngFor="let item of service.InvoiceDetailsList;let i=index;">  
+      <td >{{item.ItemDesc}}</td>
+      <td>{{item.Quantity}}</td>     
+  </tr>
+</tbody>
+
+
+</table>
+
+</div>
+</div>
+
+<button [useExistingCss]="useExistingCss" styleSheetFile="{{styleName}}"  printSectionId="demo" class="btn btn-success btn-block" ngxPrint>print</button>
+

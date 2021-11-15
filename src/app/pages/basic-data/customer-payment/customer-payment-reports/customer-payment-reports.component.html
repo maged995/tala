@@ -1,0 +1,100 @@
+<div id="demo">
+   
+  <style>
+  
+  
+    @media print {
+      .print-only{
+                display: block;
+            }
+    }
+    @media screen {
+      .print-only{
+                display: none;
+            }
+    }
+  
+    
+      </style>
+        <div class="print-only">
+          <div dir="rtl"  class="row">
+    
+            <div class="col-md-6">
+              <br/><br/>
+              <br/><br/>
+              <h4  style="font-size:xx-large;font-weight:bolder; text-align: center; ">عيادات غنيم</h4>
+              <h6 style="font-size:xx-large;font-weight: normal; text-align: center; ">للجلديه والاسنان والليزر</h6>
+              
+            </div>
+            <div class="col-md-6">
+          
+              <img src="/assets/img/finalClinic.jpg">
+              
+            </div>
+          </div>
+  </div>
+    <br/><br/>
+<h1 style="text-align: center;">{{DocTypeName}}</h1>
+<br/><br/>
+<div dir="rtl" >
+
+<table dir="rtl" class="table table-bordered table-hover">
+<tbody style="text-align: right">
+<tr>
+<td style="font-size:xx-large;font-weight: bold; text-align: center;">كود الدفع  </td>
+<td style="font-size:x-large;font-weight: bold; text-align: center;">{{CustomerPaymentCode}}</td>
+
+</tr>
+<tr>
+<td style="font-size:xx-large;font-weight: bold; text-align: center;">اسم العميل </td>
+<td style="font-size:x-large;font-weight: bold; text-align: center;">{{CustomerName}}</td>
+</tr>
+<tr>
+<td style="font-size:xx-large;font-weight: bold; text-align: center;">تاريخ الدفع</td>
+<td style="font-size:x-large;font-weight: bold; text-align: center;">{{PaymentReceiptDate |date}}</td>
+</tr>
+<tr>
+  <td style="font-size:xx-large;font-weight: bold; text-align: center;">وقت الدفع</td>
+  <td style="font-size:x-large;font-weight: bold; text-align: center;">{{PaymentReceiptDate |date:'shortTime'}}</td>
+ </tr>
+<tr>
+  <td style="font-size:xx-large;font-weight: bold; text-align: center;">اسم القسم</td>
+  <td style="font-size:x-large;font-weight: bold; text-align: center;">{{DeptDescr}}</td>
+</tr>
+<tr>
+  <td style="font-size:xx-large;font-weight: bold; text-align: center;">اسم العياده</td>
+<td style="font-size:x-large;font-weight: bold; text-align: center;">{{ClinicDesc}}</td>
+</tr>
+
+
+<tr>
+<td style="font-size:xx-large;font-weight: bold; text-align: center;">قيمة الدفع </td>
+<td style="font-size:x-large;font-weight: bold; text-align: center;">{{PayMentValue}}</td>
+</tr>
+
+</tbody>
+</table> 
+</div>
+
+<div  style=" position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+text-align: center;"class="print-only">
+  <table class="table" style="border: 0px;" dir="rtl">
+  <tr>
+    <td style="font-size:x-large;font-weight: bold; text-align: center;">العنوان</td>
+    <td colspan="2" style="font-size:x-large;font-weight: normal;  text-align: center;">دمنهور -شارع احمد محرم برج الريحان امام مجلس الدوله الدور الثاني</td>
+  </tr>
+  <tr>
+    <td style="font-size:x-large;font-weight: bold; text-align: center;">ارقام التليفون </td>
+    <td colspan="2" style="font-size:x-large;font-weight: normal;  text-align: center;">01118638620 /01004949843 /0453305002</td>
+  </tr>
+  <tr>
+    <td colspan="2" style="font-size:x-large;font-weight: bold; text-align: center;">خدمة العملاء</td>
+    <td  style="font-size:x-large;font-weight: normal;  text-align: center;"> 01551556424</td>
+  </tr>
+  </table>
+    </div>
+</div>
+<button [useExistingCss]="useExistingCss" styleSheetFile="{{styleName}}"  printSectionId="demo" class="btn btn-success btn-block" ngxPrint>print</button>

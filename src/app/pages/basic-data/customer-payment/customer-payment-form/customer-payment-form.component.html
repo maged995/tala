@@ -1,0 +1,87 @@
+<form [formGroup]="service.customerPaymentForm" *ngIf="service.customerPaymentForm" autocomplete="off" (submit)="onSubmit()">
+       
+
+
+    <div class="form-group"  *ngIf="data.CustomerId==null">
+        <label>القسم</label>
+    <ng-select formControlName="DeptId" (change)="changeDept($event)" [items]="deptList$|async"
+        bindLabel="DeptDescr"
+        bindValue="DeptId"
+        placeholder="نوع الدفع"
+      >
+      </ng-select>
+    
+      <div class="text-danger" *ngIf="(submitted || f.DeptId.touched) && f.DeptId.errors">
+  ادخل نوع الدفع من فضلك
+        </div>
+          </div>
+
+
+          <div class="form-group"  *ngIf="data.CustomerId==null">
+            <label> اسم العياده </label>
+        <ng-select formControlName="ClinicId" (change)="changeClinic($event)"   [items]="clinicList$|async"
+            bindLabel="ClinicDesc"
+            bindValue="ClinicId"
+            placeholder="العياده"
+          >
+          </ng-select>
+        
+          <div class="text-danger" *ngIf="(submitted || f.ClinicId.touched) && f.ClinicId.errors">
+      ادخل اسم العياده  من فضلك
+            </div>
+              </div>
+
+
+              <div class="form-group"  *ngIf="data.CustomerId==null">
+                <label> اسم الدكتور </label>
+            <ng-select formControlName="DoctorId"   [items]="doctorList$|async"
+                bindLabel="DoctorName"
+                bindValue="DoctorId"
+                placeholder="الدكتور"
+              >
+              </ng-select>
+            
+              <div class="text-danger" *ngIf="(submitted || f.DoctorId.touched) && f.DoctorId.errors">
+          ادخل اسم الدكتور  من فضلك
+                </div>
+                  </div>
+
+          <div class="form-group" *ngIf="data.CustomerId==null">
+            <label>الاسم </label>
+        <ng-select formControlName="CustomerId" [items]="customerList$|async"
+            bindLabel="CustomerName"
+            bindValue="CustomerId"
+            placeholder="اسم العميل"
+          >
+          </ng-select>
+        
+          <div class="text-danger" *ngIf="(submitted || f.CustomerId.touched) && f.CustomerId.errors">
+      ادخل  الاسم  من فضلك
+            </div>
+              </div>
+    
+
+              <div class="form-group" *ngIf="data.DocTypeId==4">
+                <label>   المبلغ  </label>
+                <input type="number" min="0" class="form-control" formControlName="DepitValue" [class.is-invalid]="(submitted ||f.DepitValue.touched)&& f.DepitValue.errors">
+            <div class="text-danger" *ngIf="(submitted ||f.DepitValue.touched)&& f.DepitValue.errors">
+                من فضلك ادخل  المبلغ  
+            </div>
+            </div>  
+
+
+            <div class="form-group" *ngIf="data.DocTypeId==3">
+                <label>   المبلغ  </label>
+                <input type="number" min="0" class="form-control" formControlName="CreditValue" [class.is-invalid]="(submitted ||f.CreditValue.touched)&& f.CreditValue.errors">
+            <div class="text-danger" *ngIf="(submitted ||f.CreditValue.touched)&& f.CreditValue.errors">
+                من فضلك ادخل  الملبغ  
+            </div>
+            </div>  
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>

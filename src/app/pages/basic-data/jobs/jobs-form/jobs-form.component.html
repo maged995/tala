@@ -1,0 +1,33 @@
+<form dir="ltr" [formGroup]="service.jobsForm" *ngIf="service.jobsForm" autocomplete="off" (submit)="onSubmit()">
+
+
+    <div style="text-align: left;" class="form-group">
+        <label style="text-align: left;"> employee type</label>
+        <ng-select style="text-align: left;" formControlName="EmployeeFlagId"  [items]="(employeeFlagList$|async)"
+        bindLabel="EmployeeFlagName"
+        bindValue="EmployeeFlagId"
+        placeholder="Please select the type of employee "
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.EmployeeFlagId.touched) && f.EmployeeFlagId.errors">
+        Please select the type of employee
+        </div>
+    </div>
+
+
+        <div style="text-align: left;" class="form-group">
+          <label style="text-align: left;">Job name</label>
+          <input style="text-align: left;" type="text" class="form-control" formControlName="JobName" [class.is-invalid]="(submitted ||f.JobName.touched)&& f.JobName.errors">
+      <div class="text-danger" *ngIf="(submitted ||f.JobName.touched)&& f.JobName.errors">
+        Please enter the job title
+      </div>
+      </div>
+
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>

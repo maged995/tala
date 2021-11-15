@@ -1,0 +1,193 @@
+<div id="demo">
+  
+    <h1 class="text-center">تقرير يومي</h1>  
+  <table dir="rtl" style="margin-right: 6px;" class="table table-bordered table-hover">
+    <tbody style="text-align: right">
+  <tr>
+ 
+    <td> بداية الشيفت </td>
+    <td>{{OpenDate |date}}</td>
+    
+     <td>نهاية الشيفت</td>
+     <td>{{CloseDate |date}}</td>
+
+   <td>وقت بداية الشيفت </td>
+   <td>{{OpenDate |date:'shortTime'}}</td>
+   
+    <td> وقت نهاية الشيفت </td>
+    <td>{{CloseDate |date:'shortTime'}}</td>
+  
+  </tr>
+  
+  
+  
+  <tr>
+    <td>اسم الموظف</td>
+    <td>{{EmployeeName}}</td>
+    <td>قسم الاسنان</td>
+    <td>{{Teeth}}</td>
+    <td>قسم الجلديه</td>
+    <td>{{Skin}}</td>
+
+
+   <td>المبلغ الاجمالي للشيفت</td>
+   <td>{{Balance}}</td>
+   
+  </tr>
+  
+  </tbody>
+  </table>
+  <h3 *ngIf="ReservationListTeeth.length>0"  style="text-align: center">دفعات من عملاء قسم الاسنان</h3>
+  <br>
+      <table *ngIf="ReservationListTeeth.length>0" style="margin-right: 6px;" dir="rtl" class="table table-bordered table-hover">
+        <thead style="text-align: right">
+          <th style="border: 0px;"></th>
+        <th>كود الخزنه </th>
+        <th>اسم العميل</th>
+        <th> تاريخ  الدفعه </th>
+        <th> وقت الدفعه </th>
+        <th>قيمة الدفعه</th>
+        <th>اسم العياده</th>
+        <th>اسم الدكتور</th>
+       
+      </thead>
+      <tbody dir="rtl" style="text-align: right">
+        <tr  *ngFor="let item of ReservationListTeeth;let i=index;"> 
+          <td ></td > 
+            <td>{{item.TreasuryCode}}</td>
+            <td>{{item.CustomerName}}</td>
+            <td>{{item.CurrentDate|date}}</td>
+            <td>{{item.CurrentDate|date:'shortTime'}}</td>
+            <td>{{item.CreditValue}}</td>
+            <td>{{item.ClinicDesc}}</td>
+            <td>{{item.DoctorName}}</td>
+ 
+        </tr>
+        <tr>
+       
+          <td>المجموع</td>
+          <td colspan="3">{{Dept4Credit}}</td>
+        </tr>
+      </tbody>
+      </table>
+
+
+      <h3 *ngIf="CancelReservationListTeeth.length>0"  style="text-align: center">دفعات  لعملاء قسم الاسنان</h3>
+      <br>
+          <table *ngIf="CancelReservationListTeeth.length>0" style="margin-right: 6px;" dir="rtl" class="table table-bordered table-hover">
+            <thead style="text-align: right">
+              <th style="border: 0px;"></th>
+            <th>كود الخزنه </th>
+            <th>اسم العميل</th>
+            <th> تاريخ  الدفعه </th>
+            <th> وقت الدفعه </th>
+            <th>قيمة الدفعه</th>
+            <th>اسم العياده</th>
+            <th>اسم الدكتور</th>
+            
+           
+          </thead>
+          <tbody dir="rtl" style="text-align: right">
+            <tr  *ngFor="let item of CancelReservationListTeeth;let i=index;"> 
+              <td ></td > 
+                <td>{{item.TreasuryCode}}</td>
+                <td>{{item.CustomerName}}</td>
+                <td>{{item.CurrentDate|date}}</td>
+                <td>{{item.CurrentDate|date:'shortTime'}}</td>
+              
+                <td>{{item.DebitValue}}</td>
+                <td>{{item.ClinicDesc}}</td>
+                <td>{{item.DoctorName}}</td>
+            </tr>
+            <tr>
+           
+              <td>المجموع</td>
+              <td colspan="3">{{Dept4Debit}}</td>
+            </tr>
+          </tbody>
+          </table>
+
+          <h3 *ngIf="ReservationListSkin.length>0"  style="text-align: center">دفعات من عملاء قسم الجلديه</h3>
+          <br>
+              <table *ngIf="ReservationListSkin.length>0" style="margin-right: 6px;" dir="rtl" class="table table-bordered table-hover">
+                <thead style="text-align: right">
+                  <th style="border: 0px;"></th>
+                <th>كود الخزنه </th>
+                <th>اسم العميل</th>
+                <th> تاريخ  الدفعه </th>
+                <th> وقت الدفعه </th>
+                <th>قيمة الدفعه</th>
+                <th>اسم العياده</th>
+                <th>اسم الدكتور</th>
+               
+              </thead>
+              <tbody dir="rtl" style="text-align: right">
+                <tr  *ngFor="let item of ReservationListSkin;let i=index;"> 
+                  <td ></td > 
+                    <td>{{item.TreasuryCode}}</td>
+                    <td>{{item.CustomerName}}</td>
+                    <td>{{item.CurrentDate|date}}</td>
+                    <td>{{item.CurrentDate|date:'shortTime'}}</td>
+                    <td>{{item.CreditValue}}</td>
+                    <td>{{item.ClinicDesc}}</td>
+                    <td>{{item.DoctorName}}</td>
+         
+                </tr>
+                <tr>
+               
+                  <td>المجموع</td>
+                  <td colspan="3">{{Dept3Credit}}</td>
+                </tr>
+              </tbody>
+              </table>
+        
+        
+              <h3 *ngIf="CancelReservationListSkin.length>0"  style="text-align: center">دفعات  لعملاء قسم الجلديه</h3>
+              <br>
+                  <table *ngIf="CancelReservationListSkin.length>0" style="margin-right: 6px;" dir="rtl" class="table table-bordered table-hover">
+                    <thead style="text-align: right">
+                      <th style="border: 0px;"></th>
+                    <th>كود الخزنه </th>
+                    <th>اسم العميل</th>
+                    <th> تاريخ  الدفعه </th>
+                    <th> وقت الدفعه </th>
+                    <th>قيمة الدفعه</th>
+                    <th>اسم العياده</th>
+                    <th>اسم الدكتور</th>
+                    
+                   
+                  </thead>
+                  <tbody dir="rtl" style="text-align: right">
+                    <tr  *ngFor="let item of CancelReservationListTeeth;let i=index;"> 
+                      <td ></td > 
+                        <td>{{item.TreasuryCode}}</td>
+                        <td>{{item.CustomerName}}</td>
+                        <td>{{item.CurrentDate|date}}</td>
+                        <td>{{item.CurrentDate|date:'shortTime'}}</td>
+                      
+                        <td>{{item.DebitValue}}</td>
+                        <td>{{item.ClinicDesc}}</td>
+                        <td>{{item.DoctorName}}</td>
+                    </tr>
+                    <tr>
+                   
+                      <td>المجموع</td>
+                      <td colspan="3">{{Dept3Debit}}</td>
+                    </tr>
+                  </tbody>
+                  </table>
+        
+           
+          
+       
+  
+    
+  </div>
+  
+    
+
+      
+        <button class="btn btn-success btn-block" [useExistingCss]="useExistingCss" styleSheetFile="{{styleName}}"  printSectionId="demo" class="btn btn-success btn-block" ngxPrint>print</button>
+     
+
+ 

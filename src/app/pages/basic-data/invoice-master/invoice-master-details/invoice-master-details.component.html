@@ -1,0 +1,48 @@
+
+<form [formGroup]="service.invoiceDetailForm" *ngIf="service.invoiceDetailForm" autocomplete="off" (submit)="onsubmit()">  
+       
+    <input type="hidden" formControlName="InvoiceDetailId">
+   
+
+
+                    <div class="form-group">
+                        <label>اسم  الصنف</label>
+                        <ng-select formControlName="ItemId" (change)="changeItem($event)"  [items]="(itemList$|async)" 
+                        bindLabel="ItemDesc"
+                        bindValue="ItemId"
+                        placeholder="من فضلك اختر الصنف"
+                        
+                      >
+                      </ng-select>
+                      <div class="text-danger" *ngIf="(submitted || f.ItemId.touched) && f.ItemId.errors">
+                        من فضلك ادخل اسم الصنف
+                        </div>
+                          </div>
+        <div *ngIf="IsValid" class="form-group">
+        <label>الكميه الموجوده بالمخزن</label>
+        <input type="number" formControlName="CheckedQuantity" readonly class="form-control">
+      </div>
+      <div class="form-group">
+        <label>الكميه</label>
+        <input type="number" min="0"  class="form-control"[class.is-invalid]="(submitted ||f.Quantity.touched) &&f.Quantity.errors"  type="number" formControlName="Quantity" >
+        <div *ngIf="(submitted ||f.Quantity.touched) &&f.Quantity.errors" class="text-danger">
+            <div *ngIf="f.Quantity.errors.required">
+          من فضلك ادخل الكميه
+            </div>
+            <div *ngIf="f.Quantity.errors.min">
+  الكميه يجب ان يكون اكبر من صفر
+              </div>
+          </div>
+      </div>   
+      <div class="form-group">
+      <input type="submit" value="submit" class="btn btn-success">
+      &nbsp;&nbsp;&nbsp;
+      <input type="button" value="close" class="btn btn-danger" (click)="onClose()">
+   
+      </div>  
+    
+      </form>
+      
+      
+  
+  

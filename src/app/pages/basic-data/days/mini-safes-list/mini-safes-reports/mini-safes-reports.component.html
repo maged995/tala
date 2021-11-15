@@ -1,0 +1,86 @@
+<div id="demo">
+  
+    <h1 class="text-left">treasury report</h1>  
+  <table dir="ltr" style="margin-right: 6px;" class="table table-bordered table-hover">
+    <tbody style="text-align: right">
+  <tr>
+ 
+    <td>  The date the safe was opened </td>
+    <td>{{StartDate |date}}</td>
+    
+     <td>Safe closing date </td>
+     <td>{{EndDate |date}}</td>
+
+   <td>Time to open the safe </td>
+   <td>{{StartDate |date:'shortTime'}}</td>
+   
+    <td> Locker closing time  </td>
+    <td>{{EndDate |date:'shortTime'}}</td>
+  
+  </tr>
+  
+  
+  
+  <tr>
+    <td>Employee Name</td>
+    <td>{{EmployeeName}}</td>
+   
+
+
+   <td> Total amount of storage</td>
+   <td>{{ClosedValue}}</td>
+   
+  </tr>
+  
+  </tbody>
+  </table>
+  <h3 *ngIf="DetailsList.length>0"  style="text-align: center">Full statement in the treasury</h3>
+  <br>
+      <table *ngIf="DetailsList.length>0" style="margin-right: 6px;" dir="ltr" class="table table-bordered table-hover">
+        <thead style="text-align: right">
+   
+        <th>Operation code </th>
+        <th>customer name</th>
+        <th> Date  </th>
+        <th> Time  </th>
+       
+        <th>Operation name</th>
+        <th> Creditor</th>
+        <th>Debtor</th>
+        <th>Total</th>
+      
+       
+      </thead>
+      <tbody dir="ltr" style="text-align: right">
+        <tr  *ngFor="let item of DetailsList;let i=index;"> 
+     
+            <td>{{item.TreasuryCode}}</td>
+            <td>{{item.TreaterName}}</td>
+            <td>{{item.CurrentDate|date}}</td>
+            <td>{{item.CurrentDate|date:'shortTime'}}</td>
+       
+            <td>{{item.DocTypeName}}</td>
+            <td>{{item.DebitValue}}</td>
+            <td>{{item.CreditValue}}</td>
+            <td>{{item.CurrentBalanceSafe}}</td>
+ 
+        </tr>
+      </tbody>
+      </table>
+
+
+    
+           
+          
+       
+  
+    
+  </div>
+  
+    
+
+      
+        <button class="btn btn-success btn-block" [useExistingCss]="useExistingCss" styleSheetFile="{{styleName}}"  printSectionId="demo" class="btn btn-success btn-block" ngxPrint>print</button>
+     
+
+ 

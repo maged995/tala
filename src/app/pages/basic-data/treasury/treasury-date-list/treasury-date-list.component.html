@@ -1,0 +1,134 @@
+<div class="search-div">
+    <mat-toolbar color="primary">
+      <span class="example-fill-remaining-space"></span>  
+    <span> كل ماتم في الشيفت {{CompareDate}}</span>
+    <span class="example-fill-remaining-space"></span>  
+    </mat-toolbar>   
+    
+  
+    
+   
+      <mat-form-field  class="search-form-field" floatLabel="never">
+        <input style="text-align: right" class="search" matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      
+      </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+      <div id="demo">
+      <mat-table  [dataSource]="listData"  matSort>
+        <ng-container matColumnDef="TreasuryCode">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   كود الخزنه   </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.TreasuryCode }}</mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="CustomerName">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   اسم العميل    </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CustomerName }}</mat-cell>
+          </ng-container>
+  
+
+          <ng-container matColumnDef="DocTypeName">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   اسم العمليه    </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.DocTypeName }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CurrentDate">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   تاريخ العمليه     </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CurrentDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CurrentTime">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   وقت العمليه     </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CurrentDate |date:'shortTime' }}</mat-cell>
+          </ng-container>
+
+
+     
+
+          <ng-container matColumnDef="DebitValue">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header> +     </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.DebitValue }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="CreditValue">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>    -     </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CreditValue }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="DeptDescr">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>اسم القسم</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.DeptDescr }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="ClinicDesc">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   اسم العياده    </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.ClinicDesc }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="DoctorName">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>   اسم الدكتور    </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.DoctorName }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="ShiftCode">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>    كود الشيفت    </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.ShiftCode }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="EmployeeName">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>    اسم الموظف     </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.EmployeeName }}</mat-cell>
+          </ng-container>
+          
+
+          
+
+          
+
+  
+
+        <ng-container matColumnDef="actions">
+         
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+       
+          <mat-cell *matCellDef="let element">
+            <button  class="printView" mat-icon-button  (click)="onShow(element.DocNum,element.DocTypeId)"><mat-icon>launch</mat-icon></button>
+        
+          </mat-cell>
+      
+        </ng-container>
+    
+  
+     
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+     
+      </mat-table>
+  </div>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+  
+  
+  

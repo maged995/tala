@@ -1,0 +1,120 @@
+
+<mat-toolbar color="primary">
+    <span class="example-fill-remaining-space"></span>
+  <span>customers </span>
+  <span class="example-fill-remaining-space"></span>
+  </mat-toolbar>
+
+  <div class="search-div">
+      <button style="float: left;" mat-raised-button  (click)="onCreateOrEdit(null)">
+        new addition <mat-icon>add</mat-icon>
+      </button>
+
+
+
+      <mat-form-field  class="search-form-field" floatLabel="never">
+        <input style="text-align: left" class="search" matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+      <div id="demo">
+      <mat-table  [dataSource]="listData"  matSort>
+
+
+
+        <ng-container matColumnDef="CustomerName">
+          <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>customer name   </mat-header-cell>
+          <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CustomerAge">
+          <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>age     </mat-header-cell>
+          <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerAge }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="GenderDesc">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>type     </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.GenderDesc }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="CustomerPhone1">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> main phone number  </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerPhone1 }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CustomerPhone2">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Another phone number   </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerPhone2 }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="CustomerAddress">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Address   </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerAddress }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="CustomerEmail">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  email   </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerEmail }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CustomerNotes">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Notes    </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.CustomerNotes }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="AffiliateMember">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Affiliate Member   </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.AffiliateMember }}</mat-cell>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="AffiliateMemberId">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Affiliate member name    </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.AffiliateMemberId }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="FirstPerioudBalance">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>Initial value</mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.FirstPerioudBalance }}</mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="actions">
+
+          <mat-header-cell dir="ltr" *matHeaderCellDef></mat-header-cell>
+
+          <mat-cell dir="ltr" *matCellDef="let element">
+            <button  class="printView" mat-icon-button  (click)="onCreateOrEdit(element.CustomerId)"><mat-icon>launch</mat-icon></button>
+            <button  class="printView"  mat-icon-button  color="warn" (click)="onDelete(element.CustomerId)"><mat-icon>delete</mat-icon></button>
+
+          </mat-cell>
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+      </mat-table>
+  </div>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>

@@ -1,0 +1,91 @@
+<div class="search-div">
+    <mat-toolbar color="primary">
+      <span class="example-fill-remaining-space"></span>  
+    <span>جميع الشيفت للموظف </span>
+    <span class="example-fill-remaining-space"></span>  
+    </mat-toolbar>   
+    <br/><br/>
+    <button *ngIf="Type=='shifts'" style="float: right;" mat-raised-button  (click)="onCreateOrEdit()">
+      <span *ngIf="shiftId==1"><mat-icon>add</mat-icon>اضافه جديد</span>  
+      <span  *ngIf="shiftId==0"><mat-icon>delete</mat-icon>اغلاق</span>
+      </button>
+   
+    
+   
+      <mat-form-field  class="search-form-field" floatLabel="never">
+        <input style="text-align: right" class="search" matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      
+      </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+      <div id="demo">
+      <mat-table  [dataSource]="listData"  matSort>
+     
+        <ng-container matColumnDef="OpenDate">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  تاريخ بداية الشيفت   </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.OpenDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="OpenTime">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  وقت بداية الشيفت</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.OpenDate |date:'shortTime'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CloseDate">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  تاريخ نهاية الشيفت  </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CloseDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CloseTime">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>  وقت  نهاية الشيفت  </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CloseDate |date:'shortTime' }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="EmployeeName">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header [ngClass]="showEmployee()"> اسم الموظف  </mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="showEmployee()">{{element.EmployeeName }}</mat-cell>
+          </ng-container>
+          
+          
+        <ng-container matColumnDef="actions">
+         
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+       
+          <mat-cell *matCellDef="let element">
+            <button    mat-icon-button  (click)="onShow(element.ShiftId)"><mat-icon>launch</mat-icon></button>
+            
+        
+          </mat-cell>
+      
+        </ng-container>
+    
+  
+     
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+     
+      </mat-table>
+  </div>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+  
+  
+  
+

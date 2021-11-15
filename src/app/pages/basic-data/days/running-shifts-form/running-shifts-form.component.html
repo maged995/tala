@@ -1,0 +1,39 @@
+<form [formGroup]="service.runningShiftForm" *ngIf="service.runningShiftForm" autocomplete="off" (submit)="onSubmit()">
+       
+    <div *ngIf="data.runningShift==1" class="form-group">
+        <label>اسم الورديه</label>
+        <ng-select formControlName="ShiftsTimeId" [items]="(shiftsTimesList$|async)" 
+        bindLabel="ShiftsTimeName"
+        bindValue="ShiftsTimeId"
+        placeholder="من فضلك اختر الفرع "        
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.ShiftsTimeId.touched) && f.ShiftsTimeId.errors">
+        من فضلك ادخل   اسم الورديه
+        </div>
+    </div>
+    <div *ngIf="data.runningShift==0" class="form-group">
+        <label>اسم الخزنه</label>
+        <ng-select formControlName="SafeId" [items]="(safesList$|async)" 
+        bindLabel="SafeName"
+        bindValue="SafeId"
+        placeholder="من فضلك اختر الخزنه "        
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.SafeId.touched) && f.SafeId.errors">
+        من فضلك ادخل   اسم الخزنه
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>
+    
+    
+
+

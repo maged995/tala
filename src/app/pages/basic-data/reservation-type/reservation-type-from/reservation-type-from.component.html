@@ -1,0 +1,40 @@
+<form [formGroup]="service.reservationTypeForm" *ngIf="service.reservationTypeForm" autocomplete="off" (submit)="onSubmit()">
+
+
+    <div class="form-group" *ngIf="ReservationTypeId==null">
+        <label> نوع الحجز</label>
+        <ng-select formControlName="ReservationId"  [items]="(reservationList$|async)" 
+        bindLabel="ReservationDesc"
+        bindValue="ReservationId"
+        placeholder="من فضلك اختر نوع الحجز "        
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.ReservationId.touched) && f.ReservationId.errors">
+        من فضلك ادخل   نوع الحجز
+        </div>
+    </div>
+
+
+        <div class="form-group">
+          <label>سعر الحجز</label>
+          <input type="text" class="form-control" formControlName="Price" [class.is-invalid]="(submitted ||f.Price.touched)&& f.Price.errors">
+      <div class="text-danger" *ngIf="(submitted ||f.Price.touched)&& f.Price.errors">
+<div *ngIf="f.Price.errors.required">
+    من فضلك ادخل  سعر الحجز  
+</div>
+<div *ngIf="f.Price.errors.min">
+    سعر الحجز اكبر من او يساوي صفر
+</div>
+     
+      </div>
+      </div>
+
+  
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>
+

@@ -1,0 +1,37 @@
+<form [formGroup]="service.shiftsTimeForm" *ngIf="service.shiftsTimeForm" autocomplete="off" (submit)="onSubmit()">
+
+    <div class="form-group">
+        <label style="text-align: left;">shift name</label>
+        <input style="text-align: left;" type="text" class="form-control" formControlName="ShiftsTimeName" [class.is-invalid]="(submitted ||f.ShiftsTimeName.touched)&& f.ShiftsTimeName.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.ShiftsTimeName.touched)&& f.ShiftsTimeName.errors">
+      Please enter the name of the shift
+    </div>
+    </div>
+
+
+    <div class="form-group">
+        <label style="text-align: left;">The beginning of the shift time</label>
+        <input style="text-align: left;" type="time" class="form-control" formControlName="StartTime" [class.is-invalid]="(submitted ||f.StartTime.touched)&& f.StartTime.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.StartTime.touched)&& f.StartTime.errors">
+      Please enter the start of the shift time
+    </div>
+    </div>
+
+
+    <div class="form-group">
+        <label style="text-align: left;">The end of the shift time</label>
+        <input style="text-align: left;" type="time" class="form-control" formControlName="EndTime" [class.is-invalid]="(submitted ||f.EndTime.touched)&& f.EndTime.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.EndTime.touched)&& f.EndTime.errors">
+      Please enter the end of the shift time
+    </div>
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>
+

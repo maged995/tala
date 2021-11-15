@@ -1,0 +1,15 @@
+
+  <nav dir="rtl" mat-tab-nav-bar>
+    <a mat-tab-link
+    *ngFor="let link of navLinks"
+    [routerLink]="link.link"
+    style="font-size:large;color:black;font-family: Arial, Helvetica, sans-serif; "
+    routerLinkActive="router-link-active" #rla="routerLinkActive"
+    [active]="rla.isActive" >
+{{link.label}}
+    
+    </a>
+
+    </nav>
+    <router-outlet></router-outlet>
+

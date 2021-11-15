@@ -1,0 +1,18 @@
+<form [formGroup]="service.safesForm" *ngIf="service.safesForm" autocomplete="off" (submit)="onSubmit()">
+
+        <div class="form-group">
+          <label style="text-align: left;">vault name</label>
+          <input style="text-align: left;" type="text" class="form-control" formControlName="SafeName" [class.is-invalid]="(submitted ||f.SafeName.touched)&& f.SafeName.errors">
+      <div class="text-danger" *ngIf="(submitted ||f.SafeName.touched)&& f.SafeName.errors">
+        Please enter the name of the vault
+      </div>
+      </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>
+

@@ -1,0 +1,130 @@
+
+<mat-toolbar color="primary">
+    <span class="example-fill-remaining-space"></span>
+  <span *ngIf="EmployeeFlagId==1">Doctor </span>
+  <span *ngIf="EmployeeFlagId==2">nurse </span>
+  <span *ngIf="EmployeeFlagId==3">Administrative </span>
+  <span class="example-fill-remaining-space"></span>
+  </mat-toolbar>
+
+  <div class="search-div">
+      <button style="float: left;" mat-raised-button  (click)="onCreateOrEdit(null)">
+        new addition <mat-icon>add</mat-icon>
+      </button>
+
+
+
+      <mat-form-field  class="search-form-field" floatLabel="never">
+        <input style="text-align: left" class="search" matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+      <div id="demo">
+      <mat-table  [dataSource]="listData"  matSort>
+
+
+
+        <ng-container matColumnDef="EmployeeName">
+          <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Employee Name </mat-header-cell>
+          <mat-cell dir="ltr" *matCellDef="let element">{{element.EmployeeName }}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="UserName">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Nickname</mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.UserName }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="BranchDesc">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> branch name</mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.BranchDesc }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="DeptDescr">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Department Name</mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.DeptDescr }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="JobName">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> Job name</mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.JobName }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EmpPhone">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Telephone number </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EmpPhone }}</mat-cell>
+          </ng-container>
+
+
+
+
+          <ng-container matColumnDef="EmpAddress">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Address </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EmpAddress }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="GenderDesc">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>   Type </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.GenderDesc }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EmployeeAge">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>   Age </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EmployeeAge }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EmpSalary">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>   salary </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EmpSalary }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="IsLogIn">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>   He has the right to log in as a user of the program </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.IsLogIn }}</mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="actions">
+
+          <mat-header-cell dir="ltr" *matHeaderCellDef></mat-header-cell>
+
+          <mat-cell dir="ltr" *matCellDef="let element">
+            <button  class="printView" mat-icon-button  (click)="onCreateOrEdit(element.EmployeeId)"><mat-icon>launch</mat-icon></button>
+            <button  class="printView"  mat-icon-button  color="warn" (click)="onDelete(element.EmployeeId)"><mat-icon>delete</mat-icon></button>
+
+          </mat-cell>
+
+        </ng-container>
+
+
+
+
+
+
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+      </mat-table>
+  </div>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+
+

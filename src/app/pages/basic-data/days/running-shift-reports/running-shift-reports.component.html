@@ -1,0 +1,82 @@
+<div id="demo">
+  
+    <h1 class="text-center">daily report</h1>  
+  <table dir="ltr" style="margin-right: 6px;" class="table table-bordered table-hover">
+    <tbody style="text-align: right">
+  <tr>
+ 
+    <td>  Shift opening date</td>
+    <td>{{StartDate |date}}</td>
+    
+     <td>Shift closing date </td>
+     <td>{{EndDate |date}}</td>
+
+   <td>shift opening time </td>
+   <td>{{StartDate |date:'shortTime'}}</td>
+   
+    <td> Shift closing Time  </td>
+    <td>{{EndDate |date:'shortTime'}}</td>
+  
+  </tr>
+  
+  
+  
+  <tr>
+ 
+
+   <td>shift total amount</td>
+   <td>{{ClosedValue}}</td>
+   
+  </tr>
+  
+  </tbody>
+  </table>
+  <h3 *ngIf="DetailsList.length>0"  style="text-align: center">Full statement of storage</h3>
+  <br>
+      <table *ngIf="DetailsList.length>0" style="margin-right: 6px;" dir="ltr" class="table table-bordered table-hover">
+        <thead style="text-align: right">
+   <th>vault code</th>
+        <th>vault name  </th>
+        <th>Start Date  </th>
+        <th> Start Time  </th>
+        <th> End Date  </th>
+        <th>End Time </th>
+        <th> otal safe</th>
+        <th></th>
+        
+      
+       
+      </thead>
+      <tbody dir="ltr" style="text-align: right">
+        <tr  *ngFor="let item of DetailsList;let i=index;"> 
+     
+            <td>{{item.MiniSafeCode}}</td>
+            <td>{{item.EmployeeName}}</td>
+            <td>{{item.StartDate|date}}</td>
+            <td>{{item.StartDate|date:'shortTime'}}</td>
+            <td>{{item.EndDate|date}}</td>
+            <td>{{item.EndDate|date:'shortTime'}}</td>    
+            <td>{{item.ClosedValue}}</td>
+      <td>
+        <button (click)="onMiniSafeChange(item.MiniSafeId)" > Safe details</button>
+      </td>
+ 
+        </tr>
+      </tbody>
+      </table>
+
+
+    
+           
+          
+       
+  
+    
+  </div>
+
+ <button class="btn btn-success btn-block" [useExistingCss]="useExistingCss" styleSheetFile="{{styleName}}"  printSectionId="demo" class="btn btn-success btn-block" ngxPrint>print</button>
+     
+
+ 
+
+

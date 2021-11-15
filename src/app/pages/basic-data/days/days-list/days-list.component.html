@@ -1,0 +1,102 @@
+<div class="search-div">
+    <mat-toolbar color="primary">
+      <span class="example-fill-remaining-space"></span>
+    <span>all diaries </span>
+    <span class="example-fill-remaining-space"></span>
+    </mat-toolbar>
+    <br/><br/>
+    <button  style="float: left;" mat-raised-button  (click)="onCreateOrEdit()">
+      <span *ngIf="DayId==1"><mat-icon>add</mat-icon>open daily</span>
+      <span  *ngIf="DayId==0 && runningShift==1">daily closing<mat-icon>delete</mat-icon></span>
+      </button>
+
+      <button  style="float: left;" *ngIf="DayId==0"  mat-raised-button  (click)="onCreateRunningShifts(runningShift)">
+        <span *ngIf="runningShift==1"><mat-icon>add</mat-icon>open shift</span>
+        <span  *ngIf="runningShift==0">close shift<mat-icon>delete</mat-icon></span>
+        </button>
+
+      <mat-form-field  class="search-form-field" floatLabel="never">
+        <input style="text-align: left" class="search" matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+      <div id="demo">
+      <mat-table  [dataSource]="listData"  matSort>
+
+
+        <ng-container matColumnDef="DayCode">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header> daily code  </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.DayCode }}</mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="StartDate">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Daily start date  </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.StartDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="StartTime">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Daily start time</mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.StartDate |date:'shortTime'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EndDate">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Daily end date </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EndDate |date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EndTime">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Daily end time  </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EndDate |date:'shortTime' }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="EmployeeStart">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  The name of the employee to open the shift  </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EmployeeStart}}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="EmployeeEnd">
+            <mat-header-cell dir="ltr" *matHeaderCellDef  mat-sort-header>  Name of the employee to close the shift  </mat-header-cell>
+            <mat-cell dir="ltr" *matCellDef="let element">{{element.EmployeeEnd}}</mat-cell>
+          </ng-container>
+
+        <ng-container matColumnDef="actions">
+
+          <mat-header-cell dir="ltr" *matHeaderCellDef></mat-header-cell>
+
+          <mat-cell dir="ltr" *matCellDef="let element">
+     <button (click)="onDayDetails(element.DayId)">Daily Report</button>
+
+          </mat-cell>
+
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+      </mat-table>
+  </div>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+
+

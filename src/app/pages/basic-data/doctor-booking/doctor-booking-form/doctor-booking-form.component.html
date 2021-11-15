@@ -1,0 +1,156 @@
+<form [formGroup]="service.doctorBookingForm" *ngIf="service.doctorBookingForm" autocomplete="off" (submit)="onSubmit()">
+ 
+
+    <div class="row">
+
+
+      <div class="col">
+        <div class="form-group"  *ngIf="reservation>=3">
+            <label style="text-align: left;">percentage  </label>
+            <input style="text-align: left;" type="number"  class="form-control" formControlName="Precentage" [class.is-invalid]="(submitted ||f.Precentage.touched)&& f.Precentage.errors">
+        <div class="text-danger" *ngIf="(submitted ||f.Precentage.touched)&& f.Precentage.errors">
+            <div *ngIf="f.Precentage.errors.required">
+              Please enter the percentage
+        </div>
+        <div *ngIf="f.Precentage.errors.min">
+          The ratio must be greater than zero
+        </div>  
+        <div *ngIf="f.Precentage.errors.max">
+          The percentage must be less than 100
+            </div>  
+        </div>
+        </div>
+    
+    
+      
+        <div class="form-group">
+            <label style="text-align: left;">Start Date  </label>
+            <input style="text-align: left;" type="date" class="form-control" formControlName="StartDate" [class.is-invalid]="(submitted ||f.StartDate.touched)&& f.StartDate.errors">
+        <div class="text-danger" *ngIf="(submitted ||f.StartDate.touched)&& f.StartDate.errors">
+          Please enter the start date  
+        </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label style="text-align: left;">End Date   </label>
+            <input style="text-align: left;" type="date" class="form-control" formControlName="EndDate" [class.is-invalid]="(submitted ||f.EndDate.touched)&& f.EndDate.errors">
+        <div class="text-danger" *ngIf="(submitted ||f.EndDate.touched)&& f.EndDate.errors">
+          Please enter the start date  
+        </div>
+        </div>
+    
+       
+    </div>
+
+  <div class="col" *ngIf="reservation!=3">
+
+
+    
+    <div class="form-group"  *ngIf="reservation!=3">
+        <label style="text-align: left;">the price  </label>
+        <input style="text-align: left;" type="number" (keyup)="getTotal()" class="form-control" formControlName="Price" [class.is-invalid]="(submitted ||f.Price.touched)&& f.Price.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.Price.touched)&& f.Price.errors">
+        <div *ngIf="f.Price.errors.required">
+          Please enter the price
+    </div>
+    <div *ngIf="f.Price.errors.min">
+      The price must be greater than zero
+    </div>  
+    </div>
+    </div>
+
+     
+    <div  class="form-group"  *ngIf="reservation==1 || reservation==4">
+        <label style="text-align: left;">the number  </label>
+        <input style="text-align: left;" type="number" class="form-control" (keyup)="getTotal()" formControlName="Qty" [class.is-invalid]="(submitted ||f.Qty.touched)&& f.Qty.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.Qty.touched)&& f.Qty.errors">
+        <div *ngIf="f.Qty.errors.required">
+          Please enter the number
+    </div>
+    <div *ngIf="f.Qty.errors.min">
+      The number must be greater than zero
+    </div>  
+    </div>
+    </div>
+
+
+    <div class="form-group" *ngIf="reservation==1 || reservation==4">
+        <label style="text-align: left;">Total   </label>
+        <input style="text-align: left;" type="number" disabled class="form-control" formControlName="Total" [class.is-invalid]="(submitted ||f.Total.touched)&& f.Total.errors">
+  
+    </div>
+
+
+        
+
+
+  
+  </div>
+
+
+  <div class="col">
+
+          
+    <div class="form-group">
+        <label style="text-align: left;">Section</label>
+        <ng-select style="text-align: left;" formControlName="DeptId" (change)="changeDepartMent($event)" [items]="(DeptList$|async)" 
+        bindLabel="DeptDescr"
+        bindValue="DeptId"
+        placeholder="Please select the section "        
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.DeptId.touched) && f.DeptId.errors">
+        Please select the section
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label style="text-align: left;">doctor's name</label>
+        <ng-select style="text-align: left;" formControlName="DoctorId"  [items]="(DoctorList$|async)" 
+        bindLabel="EmployeeName"
+        bindValue="EmployeeId"
+        placeholder="Please choose a doctor "        
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.DoctorId.touched) && f.DoctorId.errors">
+        Please choose a doctor
+        </div>
+    </div>
+
+
+
+        
+    <div class="form-group">
+        <label style="text-align: left;">reservation system</label>
+        <ng-select style="text-align: left;" formControlName="ReservationDoctorId" (change)="changeReservationType($event)" [items]="(ReservationTypeList$|async)" 
+        bindLabel="ReservationName"
+        bindValue="ReservationDoctorId"
+        placeholder="Please select a reservation system "        
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.ReservationDoctorId.touched) && f.ReservationDoctorId.errors">
+        Please select a reservation system
+        </div>
+    </div>
+
+        </div>
+
+
+  
+    </div>
+    
+  
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>
+    
+    
+  
+  
+  
+

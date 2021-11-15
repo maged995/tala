@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <span class="example-fill-remaining-space"></span>  
+  <span>الدفعات وانواعها</span>
+  <span class="example-fill-remaining-space"></span>  
+  </mat-toolbar> 
+  <nav dir="rtl" mat-tab-nav-bar>
+      <a mat-tab-link
+      *ngFor="let link of navLinks"
+   style="font-size:large;color:black "
+      [routerLink]="link.link"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+ {{link.label}}
+      </a>
+
+      </nav>
+      <router-outlet></router-outlet>
+

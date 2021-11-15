@@ -1,0 +1,114 @@
+<mat-toolbar color="primary">
+    <span class="example-fill-remaining-space"></span>  
+ 
+  <span *ngIf="DocTypeId==8"> اذن استلام </span>
+  <span *ngIf="DocTypeId==9"> اذن صرف </span>
+  <span *ngIf="DocTypeId==10"> اذن تحويل </span>
+  <span class="example-fill-remaining-space"></span>  
+  </mat-toolbar> 
+  <br/>
+  
+  <form [formGroup]="service.invoiceForm" *ngIf="service.invoiceForm" autocomplete="off" (submit)="onSubmit()">
+   
+  
+      <div class="row">
+    <div class="col">
+        <div class="form-group">
+            <label>اسم القسم</label>
+            <ng-select formControlName="DeptId" (change)="changeDept($event)" [items]="(deptList$|async)" 
+            bindLabel="DeptDescr"
+            bindValue="DeptId"
+            placeholder="من فضلك اختر اسم القسم "        
+          >
+          </ng-select>
+          <div class="text-danger" *ngIf="(submitted || f.DeptId.touched) && f.DeptId.errors">
+            من فضلك ادخل   القسم
+            </div>
+        </div>
+    </div>
+    <div class="col" *ngIf="DocTypeId==9">
+        <div class="form-group">
+            <label>اسم المستلم</label>
+            <ng-select formControlName="ReceiverId"  [items]="(receiverlist$|async)" 
+            bindLabel="ClinicDesc"
+            bindValue="ClinicId"
+            placeholder="من فضلك اختر اسم المستلم "        
+          >
+          </ng-select>
+          <div class="text-danger" *ngIf="(submitted || f.ReceiverId.touched) && f.ReceiverId.errors">
+            من فضلك ادخل   المستلم
+            </div>
+        </div>
+    </div>
+    <div class="col" *ngIf="DocTypeId==10">
+        <div class="form-group">
+            <label>اسم القسم المحول اليه</label>
+            <ng-select formControlName="ReceiverId" [items]="(receiverlist$|async)" 
+            bindLabel="DeptDescr"
+            bindValue="DeptId"
+            placeholder="من فضلك اختر اسم القسم المحول اليه"        
+          >
+          </ng-select>
+          <div class="text-danger" *ngIf="(submitted || f.ReceiverId.touched) && f.ReceiverId.errors">
+            من فضلك ادخل   القسم المحول اليه
+            </div>
+        </div>
+    </div>
+<div class="col">
+    <div class="form-group">
+        <label>   ملاحظات </label>
+ 
+    <input type="text"  class="form-control" formControlName="Notes" >
+    </div>
+</div>
+      </div>
+
+      <table class="table table-borderless">
+        <thead class="thead-light">
+          <th>اسم المنتج</th>
+       <th>الكميه </th>
+          <th>
+          
+                  <a  class="btn text-white btn-primary" (click)="addOrEdit(null)">
+                          <mat-icon aria-hidden="false" aria-label="icon">add</mat-icon>
+                      </a>           
+              
+            </th>
+        </thead>
+        <tbody>
+          <tr *ngIf="service.InvoiceDetailsList.length==0" >
+            <td [class.text-danger]=" service.InvoiceDetailsList.length==0" colspan="2" class="text-center">
+                من فضلك ادخل   المنتجات
+            </td>
+           
+          </tr>
+          <tr *ngFor="let item of service.InvoiceDetailsList;let i=index;">
+            <td>{{item.ItemDesc}}</td>     
+            <td>{{item.Quantity}}</td>              
+      <td>
+   
+        <a class="btn btn-warning text-white" (click)="addOrEdit(i)">Edit</a>
+          &nbsp;&nbsp;
+          <a  class="btn btn-danger text-white" (click)="onDelete(i)">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+      
+
+  
+      
+  
+    
+      <div class="form-group">
+          <input type="submit" class="btn btn-success " value="Submit">
+      </div>
+             
+      </form>
+      
+      
+    
+    
+    
+  
+  
+  

@@ -1,0 +1,80 @@
+<form [formGroup]="service.itemForm" *ngIf="service.itemForm" autocomplete="off" (submit)="onSubmit()">
+
+    <div class="form-group">
+        <label style="text-align: left;" *ngIf="data.GroupId==1"> medicament name </label>
+        <label style="text-align: left;" *ngIf="data.GroupId==2">The name of the medical supply</label>
+        <label style="text-align: left;" *ngIf="data.GroupId==3">service name</label>
+        <input style="text-align: left;" type="text" class="form-control" formControlName="ItemDesc" [class.is-invalid]="(submitted ||f.ItemDesc.touched)&& f.ItemDesc.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.ItemDesc.touched)&& f.ItemDesc.errors">
+      Please enter the name
+    </div>
+    </div>
+
+    <div class="form-group">
+        <label style="text-align: left;">its subdivision</label>
+        <ng-select style="text-align: left;" formControlName="DeptId"  [items]="(departmentList$|async)"
+        bindLabel="DeptDescr"
+        bindValue="DeptId"
+        placeholder="Please select the section"
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.DeptId.touched) && f.DeptId.errors">
+        Please select the section
+        </div>
+    </div>
+
+    <div class="form-group" style="display: none;">
+        <label style="text-align: left;"> Purchasing price  </label>
+        <input style="text-align: left;" min="0" type="number" class="form-control" formControlName="ItemBuyPrice" [class.is-invalid]="(submitted ||f.ItemBuyPrice.touched)&& f.ItemBuyPrice.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.ItemBuyPrice.touched)&& f.ItemBuyPrice.errors">
+        <div *ngIf="f.ItemBuyPrice.errors.required">
+          Please enter the purchase price
+        </div>
+        <div *ngIf="f.ItemBuyPrice.errors.min">
+          Please the purchase price is greater than or equal to zero
+        </div>
+    </div>
+    </div>
+
+<!--
+   <div class="form-group" *ngIf="data.GroupId==3">
+        <label> سعر الخدمه   </label>
+        <input type="number" min="0" class="form-control" formControlName="ItemSellPrice" [class.is-invalid]="(submitted ||f.ItemSellPrice.touched)&& f.ItemSellPrice.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.ItemSellPrice.touched)&& f.ItemSellPrice.errors">
+        <div *ngIf="f.ItemSellPrice.errors.required">
+             من فضلك ادخل سعر الخدمه
+        </div>
+        <div *ngIf="f.ItemSellPrice.errors.min">
+            من فضلك  سعر الخدمه اكبر من او يساوي صفر
+        </div>
+    </div>
+    </div>
+-->
+
+
+    <div class="form-group" style="display: none;">
+        <label style="text-align: left;">  number of points  </label>
+        <input style="text-align: left;" type="number" min="0" class="form-control" formControlName="ItemPoints" [class.is-invalid]="(submitted ||f.ItemPoints.touched)&& f.ItemPoints.errors">
+    <div class="text-danger" *ngIf="(submitted ||f.ItemPoints.touched)&& f.ItemPoints.errors">
+        <div *ngIf="f.ItemPoints.errors.required">
+          Please enter the number of points
+        </div>
+        <div *ngIf="f.ItemPoints.errors.min">
+          Please the number of points is greater than or equal to zero
+        </div>
+    </div>
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+                <div class="form-group">
+                    <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+                </div>
+    </form>
+
+
+
+
+

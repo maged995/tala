@@ -1,0 +1,23 @@
+<form [formGroup]="service.branchDepartmentForm" *ngIf="service.branchDepartmentForm" autocomplete="off" (submit)="onSubmit()">
+
+    <div class="form-group" >
+        <label style="text-align: left;">Department Name</label>
+        <ng-select style="text-align: left;" formControlName="DeptId"  [items]="(departmentList$|async)"
+        bindLabel="DeptDescr"
+        bindValue="DeptId"
+        placeholder="Please choose your customer name"
+      >
+      </ng-select>
+      <div class="text-danger" *ngIf="(submitted || f.DeptId.touched) && f.DeptId.errors">
+        Please choose your customer name
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-block" value="Submit">
+    </div>
+    <div class="form-group">
+        <input type="button" (click)="onClose()" class="btn btn-danger btn-block" value="Close">
+    </div>
+
+    </form>
